@@ -17,6 +17,7 @@ var speedOfDude = 10;
 var run = false;
 var eventCount = 0;
 
+var firstX=false
 
 var xCount = 0;
 var newX;
@@ -85,7 +86,7 @@ function Move(e)
     bigbutts();     //
     Op();           //
     dude();         // updates position
-    local();        // see's if dude has gotten the x
+    local();       // see's if dude has gotten the x
     xdisplay();     // makes the x not visable if dude has gotten it  
     emptypockets(); // 
 
@@ -105,7 +106,7 @@ function printNewX(){
     document.getElementById("theNewY").innerHTML=newY;
 }
 function change(){
-    if(eventCount%2==0){
+    if(eventCount % 2 == 0 ){
         document.getElementById("img1").src="output-onlinepngtools (1).png";
     }
     else{
@@ -166,26 +167,27 @@ function enMoveDown(){
 }
 function local()                                                          // come back here 
 {
+
     if((x>=470 && x<=530) && (y>=465 && y<=605)){
         xBool = true;
-        
     }
 
     else{
         xBool =false;
     }
+
+
 }
 
 //(x>=(newX-30) && x<=(newX+30)) && (y>=(newY+15) && y<=(newY+155))
 function localTwo(){
-    if(x>=(newX-30) && x<=(newX+30)){
+    if(x>=(newX-30) && x<=(newX+30)&& (y>=(newY-27) && y<=(newY+23))){
         xBool = true;
         xCount++;
         var thisX = document.getElementById("newXPic");
         thisX.remove();
         SpawnNewX();
     }
-
     else{
         xBool =false;
     }
@@ -231,7 +233,7 @@ function bigbutts()
 function xdisplay()
 {
     if(xBool == true){
-        document.getElementById("X").style.visibility="hidden";
+        document.getElementById("X").remove();
     }
 }
 function circleAi(){
@@ -286,7 +288,7 @@ function SpawnNewX(){
     var xPic = document.createElement("IMG");
     let div = document.getElementById("div2");
 
-    xPic.setAttribute("src","X-good.png");
+    xPic.setAttribute("src","x-good.png");
     xPic.setAttribute("id", xPicId)
 
     xPic.style.position = "fixed";
@@ -298,7 +300,7 @@ function SpawnNewX(){
 }
 function XboolReSet(){
     if(xBool==true){
-        Xbool=false;
+        XBool=false;
     }    
 }
 
