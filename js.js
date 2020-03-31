@@ -224,7 +224,7 @@ function circleAi(){
             enMoveDown();
         }
     }
-    if((Math.abs(distanceBetweenX)<=40)&&((Math.abs(distanceBetweenY)<=30)||(distanceBetweenY == 125)))
+    if((Math.abs(distanceBetweenX)<=40)&&((Math.abs(distanceBetweenY)<=30)))
     {
         GameOver();
     }
@@ -239,4 +239,6 @@ function sound(){
     var sounds = document.getElementsById("audio1");
     sounds.play();
 }
+
+
 window.onload=init;
