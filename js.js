@@ -7,16 +7,29 @@ var y = 10;
 
 var xBool;
 
+var xPicId = "newXPic";
+
 var enemyX = 50;
 var enemyY = 200; 
 
 var speedOfCircle = 5;
-var speedOfDude = 5;
+var speedOfDude = 10;
 var run = false;
-var eventCount=0
+var eventCount = 0;
+
+
+var xCount = 0;
+var newX;
+var newY;
 
 var DIV_ONE = document.getElementById("div1");
+function IsXbooltrue(){
+    var thisP=document.getElementById("bool");
 
+    thisP.innerHTML=xBool;
+    
+
+}
 function dude()
 {
     document.getElementById("dudePosX").innerHTML=x;
@@ -66,17 +79,30 @@ function Move(e)
            run= true;
             break;
     }
+    //sound();        // stupid walking sound
     circleAi();     // logic for enemy A.I
     change()        //
-    Run();          //
     bigbutts();     //
     Op();           //
     dude();         // updates position
     local();        // see's if dude has gotten the x
     xdisplay();     // makes the x not visable if dude has gotten it  
     emptypockets(); // 
-    //GameOver();     // shows game over div
+
+    if(xBool==true){
+        SpawnNewX();
+    }
+    localTwo()
+    IsXbooltrue()
+    XboolReSet()
+    printNewX()
+
+                    
     
+}
+function printNewX(){
+    document.getElementById("theNewX").innerHTML=newX;
+    document.getElementById("theNewY").innerHTML=newY;
 }
 function change(){
     if(eventCount%2==0){
@@ -85,11 +111,6 @@ function change(){
     else{
         document.getElementById("img1").src="dude-good.png";
     }   
-}
-function Run(){
-    if(run == false){
-        speedOfDude = 10;
-    }
 }
 function moveLeft()
 {
@@ -143,18 +164,35 @@ function enMoveDown(){
         enemyY+=speedOfCircle;
     }
 }
-function local()
+function local()                                                          // come back here 
 {
-    if((x>=470&&x<=530)&&(y>=465&&y<=605)){
+    if((x>=470 && x<=530) && (y>=465 && y<=605)){
         xBool = true;
+        
     }
+
+    else{
+        xBool =false;
+    }
+}
+
+//(x>=(newX-30) && x<=(newX+30)) && (y>=(newY+15) && y<=(newY+155))
+function localTwo(){
+    if(x>=(newX-30) && x<=(newX+30)){
+        xBool = true;
+        xCount++;
+        var thisX = document.getElementById("newXPic");
+        thisX.remove();
+        SpawnNewX();
+    }
+
     else{
         xBool =false;
     }
 }
 function Pocket()
 {
-    var myDiv= document.getElementById("div1");
+    var myDiv = document.getElementById("div1");
 
     if(myDiv.style.visibility == "visible"){
         myDiv.style.visibility = "hidden";
@@ -180,7 +218,7 @@ function bigbutts()
         var xpic = document.getElementById("X");
         var Pocketdiv = document.getElementById("div1");
 
-        Xpic = xpic;
+        Xpic.setAttribute("src","X-good.png");
         Xpic.style.visibility="inherit";
 
         Xpic.style.top="0";
@@ -189,6 +227,7 @@ function bigbutts()
         Pocketdiv.appendChild(Xpic);   
     }
 }
+// if player has collected the x it is hidden
 function xdisplay()
 {
     if(xBool == true){
@@ -228,17 +267,39 @@ function circleAi(){
     {
         GameOver();
     }
-
 }
+// shows game over div
 function GameOver(){
 
     document.body.style.backgroundColor="red";
     document.getElementById("end").style.visibility="visible";
 }
 function sound(){
-    var sounds = document.getElementsById("audio1");
+    var sounds = document.getElementById("audio1");
     sounds.play();
 }
+function SpawnNewX(){
 
+    newX = Math.floor(Math.random() * 1485) + 1;
+    newY = Math.floor(Math.random() * 620) + 1;
+
+    var xPic = document.createElement("IMG");
+    let div = document.getElementById("div2");
+
+    xPic.setAttribute("src","X-good.png");
+    xPic.setAttribute("id", xPicId)
+
+    xPic.style.position = "fixed";
+
+    xPic.style.left = parseInt(newX)+'px';
+    xPic.style.top = parseInt(newY)+'px';
+
+    div.appendChild(xPic);
+}
+function XboolReSet(){
+    if(xBool==true){
+        Xbool=false;
+    }    
+}
 
 window.onload=init;
