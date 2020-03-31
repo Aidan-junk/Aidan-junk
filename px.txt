@@ -1,0 +1,5 @@
+dude - 47 x 120 px
+o    - 32 x 27  px
+x    - 20 x 25  px
+
+
