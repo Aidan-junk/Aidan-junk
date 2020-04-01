@@ -281,7 +281,7 @@ function SpawnNewX(){
     var xPic = document.createElement("IMG");
     let div = document.getElementById("div2");
 
-    xPic.setAttribute("src","x-good.png");
+    xPic.setAttribute("src","X-good.png");
     xPic.setAttribute("id", xPicId)
 
     xPic.style.position = "fixed";
