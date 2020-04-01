@@ -24,13 +24,7 @@ var newX;
 var newY;
 
 var DIV_ONE = document.getElementById("div1");
-function IsXbooltrue(){
-    var thisP=document.getElementById("bool");
 
-    thisP.innerHTML=xBool;
-    
-
-}
 function dude()
 {
     document.getElementById("dudePosX").innerHTML=x;
@@ -94,7 +88,6 @@ function Move(e)
         SpawnNewX();
     }
     localTwo()
-    IsXbooltrue()
     XboolReSet()
     printNewX()
 
