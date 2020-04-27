@@ -1,29 +1,24 @@
 
-var ObjImg=null;
-var enemyO=null;
-
+var ObjImg = null;
+var enemyO = null;
 var x = 300;
 var y = 10;
-
 var xBool;
-
 var xPicId = "newXPic";
-
 var enemyX = 50;
 var enemyY = 200; 
-
 var speedOfCircle = 5;
 var speedOfDude = 10;
 var run = false;
 var eventCount = 0;
-
-var firstX=false
-
+var firstX = false
 var xCount = 0;
 var newX;
 var newY;
-
 var DIV_ONE = document.getElementById("div1");
+var windowWidth = document.documentElement.clientWidth;
+var windowHeight = document.documentElement.clientHeight;
+
 
 function dude()
 {
@@ -48,7 +43,7 @@ function init()
 }
 function Move(e)
 {
-    
+    windowWidth = document.documentElement.clientWidth;
     eventCount++;
     
     var key_code=e.which||e.keyCode;
@@ -74,13 +69,12 @@ function Move(e)
            run= true;
             break;
     }
-    //sound();        // stupid walking sound
     circleAi();     // logic for enemy A.I
     change()        //
     bigbutts();     //
     Op();           //
     dude();         // updates position
-    local();       // see's if dude has gotten the x
+    local();        // see's if dude has gotten the x
     xdisplay();     // makes the x not visable if dude has gotten it  
     emptypockets(); // 
 
@@ -88,15 +82,8 @@ function Move(e)
         SpawnNewX();
     }
     localTwo()
-    XboolReSet()
-    printNewX()
-
-                    
+    XboolReSet()        
     
-}
-function printNewX(){
-    document.getElementById("theNewX").innerHTML=newX;
-    document.getElementById("theNewY").innerHTML=newY;
 }
 function change(){
     if(eventCount % 2 == 0 ){
@@ -122,14 +109,15 @@ function moveUp()
 }
 function moveRight()
 {
-    if(x<1480){
+    console.log(parseInt(windowWidth));
+    if(x<parseInt(windowWidth)-59){
         ObjImg.style.left = parseInt(x)+speedOfDude+'px';
         x+=speedOfDude;
     }
 }
 function moveDown()
 {
-    if(y<620){
+    if(y<windowHeight-135){
         ObjImg.style.top = parseInt(y)+speedOfDude+'px';
         y+=speedOfDude;
    }
@@ -147,32 +135,27 @@ function enMoveUp(){
     }
 }
 function enMoveRight(){
-    if(enemyX<1495){
+    if(enemyX<windowWidth){
         enemyO.style.left = parseInt(enemyX)+speedOfCircle+'px';
         enemyX+=speedOfCircle;
     }
 }
 function enMoveDown(){
-    if(enemyY<715){
+    if(enemyY<windowHeight){
         enemyO.style.top =  parseInt(enemyY)+speedOfCircle+'px';
         enemyY+=speedOfCircle;
     }
 }
 function local()                                                          // come back here 
 {
-
     if((x>=470 && x<=530) && (y>=465 && y<=605)){
         xBool = true;
     }
 
     else{
-        xBool =false;
+        xBool = false;
     }
-
-
 }
-
-//(x>=(newX-30) && x<=(newX+30)) && (y>=(newY+15) && y<=(newY+155))
 function localTwo(){
     if(x>=(newX-30) && x<=(newX+30)&& (y>=(newY-27) && y<=(newY+23))){
         xBool = true;
@@ -222,9 +205,7 @@ function bigbutts()
         Pocketdiv.appendChild(Xpic);   
     }
 }
-// if player has collected the x it is hidden
-function xdisplay()
-{
+function xdisplay(){
     if(xBool == true){
         document.getElementById("X").remove();
     }
@@ -235,7 +216,7 @@ function circleAi(){
     let distanceBetweenY = y-enemyY;
     var moveTowards = false;
     const INTREVAL = 400;
-    const NEG =0;
+    const NEG = 0;
 
     if((Math.abs(distanceBetweenX)<=INTREVAL)||(Math.abs(distanceBetweenY)<=INTREVAL)){
         moveTowards = true;
@@ -275,13 +256,13 @@ function sound(){
 }
 function SpawnNewX(){
 
-    newX = Math.floor(Math.random() * 1485) + 1;
-    newY = Math.floor(Math.random() * 620) + 1;
+    newX = Math.floor(Math.random() * windowHeight-135) + 1;
+    newY = Math.floor(Math.random() * windowWidth-100) + 1;
 
     var xPic = document.createElement("IMG");
     let div = document.getElementById("div2");
 
-    xPic.setAttribute("src","X-good.png");
+    xPic.setAttribute("src","x-good.png");
     xPic.setAttribute("id", xPicId)
 
     xPic.style.position = "fixed";
@@ -297,4 +278,4 @@ function XboolReSet(){
     }    
 }
 
-window.onload=init;
+window.onload = init;
